@@ -1,12 +1,12 @@
 Building a CRUD (Create Read Update Delete) application with PHP/MySQL/Bootstrap4 for employee checkin/checkout purpose.
 
 # MySQL commands needed
-## INSERT
+## INSERT (CREATE)
 ```SQL
 INSERT INTO table ( col1, col2 ) VALUES ('val1', 'val2' )
 ```
 
-## SELECT
+## SELECT (READ)
 ```SQL
 SELECT * FROM table WHERE col1 = 'val1' AND col2 = 'val2'
 ```
