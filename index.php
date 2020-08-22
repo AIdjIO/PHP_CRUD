@@ -34,7 +34,7 @@ require_once('db_connect.php');
   </head>
   <body>
   
-<?php session_start(); ?>
+  <?php require_once 'process.php';?>
   <?php  if (isset($_SESSION['message'])): ?>
   <div class="alert alert-<?=$_SESSION['msg_type']?>">
     <?php 
@@ -76,6 +76,7 @@ require_once('db_connect.php');
           <td>
             <a href="index.php?edit=<?php echo $employee['employee_id']; ?>" class="btn btn-info">Edit</a>
             <a href="process.php?delete=<?php echo $employee['employee_id']; ?>" class="btn btn-danger">Delete</a>
+            <a href="process.php?checkout=<?php echo $employee['employee_id']; ?>" class="btn btn-success">Checkout</a>
           </td>
         </tr>
       <!-- Mark the end of the foreach loop -->
@@ -87,21 +88,22 @@ require_once('db_connect.php');
 <p>Fill in the form below in order to check in</p>
 <p>Don't forget to check out when you leave</p>
 <form action="process.php" method="POST" class="needs-validation" novalidate>
+        <input type="hidden" name="employee_id" value="<?php echo $employee_id ?>" />
     <div class="form-group">
     <label for="uname">First Name:</label>
-    <input class="form-control"  type="text" name="first_name" placeholder="Enter your first name" value="" required/>
+    <input class="form-control"  type="text" name="first_name" placeholder="Enter your first name" value="<?php echo $first_name; ?>" required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
     <label>Last Name:</label>
-    <input class="form-control"  type="text" name="last_name" placeholder="Enter your last name" value="" required/>
+    <input class="form-control"  type="text" name="last_name" placeholder="Enter your last name" value="<?php echo $last_name; ?>" required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
     <label>Department:</label>
-    <input class="form-control"  type="text" name="department" placeholder="Enter your department (optional)" value="" />
+    <input class="form-control"  type="text" name="department" placeholder="Enter your department (optional)" value="<?php echo $department; ?>" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
@@ -114,7 +116,11 @@ require_once('db_connect.php');
     </label>
     </div>
     <div class="form-group">
-    <button class="btn btn-primary" type="submit" name="save">Save</button>
+      <?php if(isset($_GET['edit'])): ?>
+        <button class="btn btn-warning" type="submit" name="update">Update</button>
+      <?php else: ?>
+        <button class="btn btn-primary" type="submit" name="save">Save</button>
+      <?php endif ?>
     </div>
 </form>
 </div>
