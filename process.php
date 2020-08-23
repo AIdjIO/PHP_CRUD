@@ -1,7 +1,7 @@
 <?php
 
 require_once('db_connect.php');
-
+date_default_timezone_set("Europe/London");
 $first_name = "";
 $last_name = "";
 $department = "";
@@ -23,8 +23,7 @@ $temp_check = filter_input(INPUT_POST,'temp_check');
 $date_in = date('Y-m-d H:i:s');
 
 # Verify that everything has bee entered (should not be required as validation is done in HTML intput form with bootstrap validation classes)
-if($first_name == null || $last_name == null || 
-$temp_check == null){
+if($first_name == null || $last_name == null ){
 # Print an error if values aren't entered
 $err_msg = "All values not entered<br>";
 include('db_error.php');
@@ -38,17 +37,18 @@ include('db_error.php');
 } elseif(!preg_match("/[a-zA-Z]{3,30}$/", $last_name)){
 $err_msg = "Last name not valid<br>";
 include('db_error.php');
-} elseif(!preg_match("/[yY]{1}/", $temp_check)){
-$err_msg = $temp_check . " Temp Check Not Valid<br>";
-include('db_error.php');
-} elseif (!($temp_check ==='Y')) {
+} elseif(!preg_match("/[a-zA-Z]{0,30}$/", $department)){
+  $err_msg = "Department not valid<br>";
+  include('db_error.php');
+} else { 
+  if (!($temp_check==1)) {
 # if temperature is not 'Y' go home.
-$temp_check=false;
-echo "You need to return home.<br>";
+$temp_ok='NOK';
+$employee_msg = "You should check out now<br> and return home.<br>";
 } else{
-$temp_checked=true;
-echo "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
-
+$temp_ok='OK';
+$employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
+}
 
 # Create your query using : to add parameters to the statement
 $query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, employee_id, temp_check) 
@@ -60,7 +60,7 @@ $employee_create_statement = $db->prepare($query_employee_create);
 # Bind values to parameters in the prepared statement
 $employee_create_statement->bindValue(':first_name',$first_name);
 $employee_create_statement->bindValue(':last_name',$last_name);
-$employee_create_statement->bindValue(':temp_check',$temp_check);
+$employee_create_statement->bindValue(':temp_check',$temp_ok);
 $employee_create_statement->bindValue(':checkin',$date_in);
 $employee_create_statement->bindValue(':department',$department);
 $employee_create_statement->bindValue(':employee_id',null,PDO::PARAM_INT);
@@ -72,10 +72,10 @@ $employee_create_statement->closeCursor();
 if (!$execute_create_success){
 # If an error occurred print the error 
 print_r($employee_create_statement->errInfo()[2]);
-$_SESSION['message']='Record has not been saved due to an error!';
+$_SESSION['message']='Record has not been saved due to an error!<br>';
 $_SESSION['msg_type']='success';
 } else{
-  $_SESSION['message']='Record has been saved!';
+  $_SESSION['message']='Record has been saved!<br>' . $employee_msg;
   $_SESSION['msg_type']='success';
 }
 }
