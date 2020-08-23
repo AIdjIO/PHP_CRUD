@@ -1,5 +1,6 @@
 Improvement still required:
-- create an admin login screen
+- not allow employee to checkin more than once in a day.
+- create an admin login screen.
 - provide admin related functionality only to admin user (edit/delete user, print (copy, pdf, csv, xlsx, hard print).
 
 Building a CRUD (Create Read Update Delete) application with PHP/MySQL/Bootstrap4 for employee checkin/checkout purpose.
