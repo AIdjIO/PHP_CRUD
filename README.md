@@ -28,3 +28,6 @@ UPDATE table set col1 = 'val1', col2 = 'val2' WHERE col3 = 'val3
 ```SQL
 DELETE FROM table WHERE col1 = 'val1'
 ```
+
+# database structure
+![image](https://user-images.githubusercontent.com/67799618/91453588-d9242b80-e877-11ea-9d06-8068e40cceff.png)
