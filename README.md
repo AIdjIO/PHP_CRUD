@@ -7,7 +7,10 @@ Improvement still required:
 - ~~ability to select 'from' and 'to' date for the admin backend instead of showing only daily check in on the front end~~ implemented
 
 Building a CRUD (Create Read Update Delete) application with PHP/MySQL/Bootstrap4/datatable for employee checkin/checkout purpose.
-![image](https://user-images.githubusercontent.com/67799618/90959493-61c75400-e493-11ea-8ef1-e49c9cc73cc5.png)
+# User Front End
+![image](https://user-images.githubusercontent.com/67799618/91454579-0cb38580-e879-11ea-9f6f-06c697b7e294.png)
+# Admin Login
+
 # MySQL commands needed
 ## INSERT (CREATE)
 ```SQL
