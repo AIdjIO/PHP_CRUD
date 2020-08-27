@@ -12,8 +12,7 @@ Building a CRUD (Create Read Update Delete) application with PHP/MySQL/Bootstrap
 # Admin Login (username: admin, password:123456)
 ![image](https://user-images.githubusercontent.com/67799618/91454815-4a181300-e879-11ea-9474-8ebb9228b3f3.png)
 # Admin Backend
-
-
+![image](https://user-images.githubusercontent.com/67799618/91455044-877ca080-e879-11ea-8e8f-7423f1b74c0c.png)
 # MySQL commands needed
 ## INSERT (CREATE)
 ```SQL
