@@ -1,4 +1,4 @@
-<?php
+<?php error_reporting(0);
 # I create a PHP Data Object to work with our DB
 # Using a PDO allows the same PHP code to work with
 # multiple types of DBs.

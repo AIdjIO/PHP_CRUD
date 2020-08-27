@@ -1,68 +1,81 @@
-<div class="container-fluid">
-    <h2>Employee List</h2>
-    <table id="myTable" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Temp checked</th>
-        <th>In</th>
-        <th>Out</th>
-        <th colspan="2">Action</th>
-      </tr>
-      </thead>
-      <!-- Get an array from the DB query and cycle
-      through each row of data -->
-      <tbody>
-      <?php foreach($employees as $employee): ?>
-        <tr>
-          <!-- Print out individual column data -->
-          <td><?php echo $employee['employee_id']; ?></td>
-          <td><?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?></td>
-          <td><?php echo $employee['department']; ?></td>
-          <td><?php echo $employee['temp_check']; ?></td>
-          <td><?php echo $employee['checkin']; ?></td>
-          <td><?php echo $employee['checkout']; ?></td>
-          <td></td><td></td>
-        </tr>
-      <!-- Mark the end of the foreach loop -->
-      <?php endforeach; ?>
-      </tbody>
-    </table>
-
-    <h2>Check In</h2>
-<p>Fill in the form below in order to check in</p>
-<p>Don't forget to check out when you leave</p>
-<form action="process.php" method="POST" class="needs-validation" novalidate>
+<button id="btnOpnCheckIn"class="btn btn-info btn-block" onclick="openForm()">Check In Form</button>
+<form style="display:none;" id="myForm" action="process.php" method="POST" >
+        <input type="hidden" name="employee_id" value="<?php echo $employee_id ?>" />
     <div class="form-group">
     <label for="uname">First Name:</label>
-    <input class="form-control"  type="text" name="first_name" placeholder="Enter your first name" value="" required/>
+    <input class="form-control"  type="text" name="first_name" placeholder="First name" value="<?php echo $first_name; ?>"title="First name" required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
     <label>Last Name:</label>
-    <input class="form-control"  type="text" name="last_name" placeholder="Enter your last name" value="" required/>
+    <input class="form-control"  type="text" name="last_name" placeholder="Last name" value="<?php echo $last_name; ?>" title="Last name"required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
     <label>Department:</label>
-    <input class="form-control"  type="text" name="department" placeholder="Enter your department (optional)" value="" />
+    <input class="form-control"  type="text" name="department" placeholder="Department (optional)" value="<?php echo $department; ?>"  title="Department (optional)" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
-    <div class="form-group form-check">
+    
     <label class="form-check-label">
-    <input class="form-check-input" type="checkbox" name="temp_check" value="Y" required/>
-    Have you checked your temperature is less than 38°C?<br>
+    <input class="form-check-input" type="checkbox" name="temp_check" value="1" title="make sure you check your temperature with the thermometer provided"/>
+    Is your temperature less than 38°C?<br>
     <div class="valid-feedback">Temperature OK</div>
     <div class="invalid-feedback">Check this checkbox to continue.</div>
     </label>
-    </div>
+
     <div class="form-group">
-    <button class="btn btn-primary" type="submit" name="save">Save</button>
-    </div>
+      <?php if(isset($_GET['edit'])): ?>
+        <button class="btn btn-warning btn-block" type="submit" name="update">Update</button>
+      <?php else: ?>
+        <button class="btn btn-primary btn-block" type="submit" name="save">Check In</button>
+      <?php endif ?>
+        <button class="btn btn-info btn-block" type="button" onclick="closeForm()">Cancel</button>
+     </div>
 </form>
-</div>
+<script>
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+  document.getElementById("btnOpnCheckIn").style.display = "block";
+}
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+  document.getElementById("btnOpnCheckIn").style.display = "none";
+}
+</script>
+
+if (isset($_SESSION['UserData']['Username'])){
+    $_SESSION['message']='Congratulation! You are logged into password protected page. <a href="logout.php">Click here to Logout.</a>';
+    $_SESSION['msg-type']='info';
+    } else {
+      $_SESSION['message'] = '<a href="login.php" class="btn btn-info">Admin</a>';
+      $_SESSION['msg-type']='info';
+    }
+
+    <?php
+if (isset($_SESSION['UserData']['Username'])){
+  $admin_msg = 'Congratulation! You are logged into password protected page. <a href="logout.php">Click here to Logout.</a>';
+  echo $admin_msg;
+  } else {
+    $admin_msg = '<a href="login.php" class="btn btn-info">Admin</a>';
+    echo $admin_msg;
+  }
+  ?>
+
+  <?php  if ((isset($_SESSION['message']))): ?>
+  <div class="alert alert-<?php echo $_SESSION['msg_type'];?>">
+    <?php 
+      echo $_SESSION['message'];
+      unset($_SESSION['message']);
+    ?>
+    </div>
+    <?php endif ?>
+
+    $query_emp ='SELECT * FROM employees WHERE date(checkin)=date(now()) ORDER BY employee_id';
+
+    $query_emp ='SELECT * FROM employees WHERE date(checkin)=' . '<?php echo $myDate ?>' . ') ORDER BY employee_id';
+
+    (isset($_GET['myDate']))? 

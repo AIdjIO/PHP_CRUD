@@ -1,5 +1,4 @@
-<?php
-
+<?php  error_reporting(0);
 require_once('db_connect.php');
 date_default_timezone_set("Europe/London");
 $first_name = "";
@@ -7,10 +6,9 @@ $last_name = "";
 $department = "";
 $temp_check = "";
 $employee_id=0;
+$location = ""; #specify a physical location (optional)
 
-if(!session_start()){
-echo "session not started";
-}
+session_start(); /* Starts the session */
 
 if (isset($_POST['save'])){
 # Get data from form
@@ -32,27 +30,30 @@ include('db_error.php');
 # Regular Expressions are codes used to match patterns
 # Check if first name contains only characters with a max of 30
 } elseif(!preg_match("/[a-zA-Z]{3,30}$/", $first_name)){
-$err_msg = "First name not valid<br>";
-include('db_error.php');
+  $_SESSION['message']='First name not valid<br>Expecting only alphabetical letters between 3 to 30 characters long<br>';
+  $_SESSION['msg_type']='warning';
+#include('db_error.php');
 } elseif(!preg_match("/[a-zA-Z]{3,30}$/", $last_name)){
-$err_msg = "Last name not valid<br>";
-include('db_error.php');
-} elseif(!preg_match("/[a-zA-Z]{0,30}$/", $department)){
-  $err_msg = "Department not valid<br>";
-  include('db_error.php');
+  $_SESSION['message'] = "Last name not valid<br>Expecting only alphabetical letters between 3 to 30 characters long<br>";
+  $_SESSION['msg_type']='warning';
+#include('db_error.php');
+} elseif(!preg_match("/[a-zA-Z]{1,30}$/", $department)){
+  $_SESSION['message']= "Department not valid<br>Expecting only alphabetical letters between 0 to 30 characters long<br>";
+  $_SESSION['msg_type']='warning';
+#include('db_error.php');
 } else { 
   if (!($temp_check==1)) {
 # if temperature is not 'Y' go home.
 $temp_ok='NOK';
-$employee_msg = "You should check out now<br> and return home.<br>";
+$employee_msg = "You should check out now if your temperature is not less than 38°C<br> and return home.<br>";
 } else{
 $temp_ok='OK';
 $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
 }
 
 # Create your query using : to add parameters to the statement
-$query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, employee_id, temp_check) 
-VALUES (:first_name, :last_name,:department, :checkin, :employee_id, :temp_check)';
+$query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, last_updated, employee_id, temp_check) 
+VALUES (:first_name, :last_name,:department, :checkin, :last_updated, :employee_id, :temp_check)';
 
 # Create a PDOStatement object
 $employee_create_statement = $db->prepare($query_employee_create);
@@ -62,6 +63,7 @@ $employee_create_statement->bindValue(':first_name',$first_name);
 $employee_create_statement->bindValue(':last_name',$last_name);
 $employee_create_statement->bindValue(':temp_check',$temp_ok);
 $employee_create_statement->bindValue(':checkin',$date_in);
+$employee_create_statement->bindValue(':last_updated',$date_in);
 $employee_create_statement->bindValue(':department',$department);
 $employee_create_statement->bindValue(':employee_id',null,PDO::PARAM_INT);
 
@@ -79,9 +81,6 @@ $_SESSION['msg_type']='success';
   $_SESSION['msg_type']='success';
 }
 }
-
-
-
 header("location: index.php");
 }
 
@@ -114,6 +113,9 @@ header("location: index.php");
 
 # Edit button is pressed (update record)
 if(isset($_GET['edit'])){
+
+  # show edit form
+
   $employee_id = $_GET['edit'];
   $query_employee_edit = 'SELECT * FROM employees WHERE employee_id=:employee_id';
   
@@ -128,10 +130,8 @@ if(isset($_GET['edit'])){
 
   if (!$execute_edit_success){
     print_r($employee_edit_statement->errInfo()[2]);
-   
   } else{
     $employee_edit = $employee_edit_statement->fetchAll();
-   echo "fetching employes";
     $first_name = $employee_edit[0]['first_name'];
     $last_name = $employee_edit[0]['last_name'];
     $department = $employee_edit[0]['department'];
@@ -140,17 +140,28 @@ if(isset($_GET['edit'])){
   $employee_edit_statement->closeCursor();
   }
 
-  # Edit button is pressed (update record)
+  # Update button is pressed (update record)
 if(isset($_POST['update'])){
+
   $employee_id = $_POST['employee_id'];
   $first_name = filter_input(INPUT_POST,'first_name');
   $last_name =  filter_input(INPUT_POST,'last_name');
   $department = filter_input(INPUT_POST,'department');
   $temp_check = filter_input(INPUT_POST,'temp_check');
+  $date_updated = date('Y-m-d H:i:s');
+
+  if (!($temp_check==1)) {
+    # if temperature is not 'Y' go home.
+    $temp_ok='NOK';
+    $employee_msg = "You should check out now<br> and return home.<br>";
+    } else{
+    $temp_ok='OK';
+    $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
+    }
 
   $query_employee_update = 'UPDATE employees
                             SET first_name = :first_name, last_name=:last_name,
-                            department=:department, temp_check=:temp_check
+                            department=:department, temp_check=:temp_check, last_updated=:last_updated
                             WHERE employee_id=:employee_id';
   
   # Create a PDO statement object
@@ -159,7 +170,8 @@ if(isset($_POST['update'])){
   # Bind values to parameters in the prepared statement
 $employee_update_statement->bindValue(':first_name',$first_name);
 $employee_update_statement->bindValue(':last_name',$last_name);
-$employee_update_statement->bindValue(':temp_check',$temp_check);
+$employee_update_statement->bindValue(':temp_check',$temp_ok);
+$employee_update_statement->bindValue(':last_updated',$date_updated);
 $employee_update_statement->bindValue(':department',$department);
 $employee_update_statement->bindValue(':employee_id',$employee_id,PDO::PARAM_INT);
   
