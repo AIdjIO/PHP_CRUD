@@ -5,6 +5,7 @@ Improvement still required:
 - add ability for admin to update login password.
 - ~~provide admin related functionality only to admin user (edit/delete user, print (copy, pdf, csv, xlsx, hard print).~~ implemented
 - ~~ability to select 'from' and 'to' date for the admin backend instead of showing only daily check in on the front end~~ implemented
+- added ability to print with Brother QL-700 (requires Python 3 and ![Brother_ql](https://github.com/pklaus/brother_ql) project installed)
 
 Building a CRUD (Create Read Update Delete) application with PHP/MySQL/Bootstrap4/datatable for employee checkin/checkout purpose.
 # User Front End
