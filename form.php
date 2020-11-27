@@ -1,9 +1,9 @@
 <?php error_reporting(0); ?>
 <button id="btnOpnCheckIn" class="btn btn-info btn-block" onclick="openForm()">Fill In Form</button>
 <form style="display:<?php if (isset($_GET['edit'])): echo 'block'; else: echo 'none'; endif ?>;" id="myForm" action="process.php" method="POST" >
-        <input type="hidden" name="employee_id" value="<?php echo $employee_id ?>" />
+    <input type="hidden" name="employee_id" value="<?php echo $employee_id ?>" />
     <div class="form-group">
-    <label for="uname">First Name:</label>
+    <label for="first_name">First Name:</label>
     <input class="form-control"  type="text" name="first_name" placeholder="First name" value="<?php echo $first_name; ?>" title="First name" required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
     <label>Department:</label>
-    <input class="form-control"  type="text" name="department" placeholder="Department (optional)" value="<?php echo $department; ?>"  title="Department" required/>
+    <input class="form-control"  type="text" name="department" placeholder="Department (optional)" value="<?php echo $department; ?>"  title="Department (optional)" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
