@@ -19,8 +19,8 @@
    <script type="text/javascript" src="./assets/js/buttons.html5.min.js"></script>
    <script type="text/javascript" src="./assets/js/buttons.print.min.js"></script>
    <script type="text/javascript" src="./assets/js/popper.min.js"></script>
-   <script src="./assets/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="./assets/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+   <script src="./assets/js/bootstrap.min.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="./assets/css/font-awesome.min.css" crossorigin="anonymous">
    <style>
        <?php if (!isset($_SESSION['UserData']['Username'])) : ?>
        .dt-buttons {

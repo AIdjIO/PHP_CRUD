@@ -1,4 +1,5 @@
-<?php error_reporting(0);
+<?php
+error_reporting(0);
 include 'header.php';
 
  session_start(); /* Starts the session */
