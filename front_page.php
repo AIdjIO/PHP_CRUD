@@ -1,65 +1,59 @@
 
 <style>
-.center {
-  display: table;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width:100%;
-  margin:auto;
-  vertical-align:middle;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.card{
+  margin: 0 auto;
 }
 
 .fa-ticket{
+  font-size:15em;
   color:MediumSeaGreen;
 }
 
 .fa-users{
+  font-size:15em;
   color:DodgerBlue;
 }
 
-.fa-users:hover{
+button:hover .fa-users{
   color:#FFFFFF;
     background-color:DodgerBlue;
 }
 
-.fa-ticket:hover{
+button:hover .fa-ticket{
   color:#FFFFFF;
     background-color:MediumSeaGreen;
 }
 
-.fa {
-  font-size:15em;
-}
-
-.card:hover{
+.button:hover{
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+button {
+  border:none;
 }
 </style>
 
 <form action="index.php" method="post">
-<div class="card-deck">
-<div class="card border-dark shadow-lg">
-<button class="" type="submit" name="employee">
+
+<div class="row">
+
+<button class="d-flex justify-content-center col-sm-6" type="submit" name="employee">
+<div class="card">
 <i class="fa fa-users"></i>
-</button>
-<h3 class="card-header" style="text-align:center;">Employee</h3>
+<h3 class="card-footer" style="text-align:center;">Employee</h3>
 </div>
-<div class="card border-dark">
-<button class="" type="submit" name="visitor">
+</button>
+
+
+<button class="d-flex justify-content-center col-sm-6" type="submit" name="visitor">
+<div class="card ">
 <i class="fa fa-ticket fa-ticket-alt"></i>
+<h3 class="card-footer" style="text-align:center">Visitor</h3>
+</div>
 </button>
-<h3 class="card-header" style="text-align:center">Visitor</h3>
 </div>
-</div>
+
 </form>
-
-
-
 
