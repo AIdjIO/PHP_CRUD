@@ -1,5 +1,6 @@
-<?php  error_reporting(0);
+<?php  error_reporting(1);
 require_once('db_connect.php');
+require_once('functions.php');
 date_default_timezone_set("Europe/London");
 $first_name = "";
 $last_name = "";
@@ -49,6 +50,7 @@ $employee_msg = "You should check out now if your temperature is not less than 3
 } else{
 $temp_ok='OK';
 $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
+createVisitorBadge(574,354, $first_name, $last_name, $department);
 }
 
 # Create your query using : to add parameters to the statement
