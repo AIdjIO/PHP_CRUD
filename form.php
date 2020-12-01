@@ -28,13 +28,13 @@
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="form-group">
-    <?php if (isset($_POST['visitor'])):?>
+    <?php if (isset($_POST['visitor']) || $_GET['visit']):?>
     <label>Company Name:</label>
     <input class="form-control"  type="text" name="department" placeholder="Company Name" value="<?php echo $department; ?>"  title="Company Name" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     <label for="phone">Enter your phone number:</label>
-    <input class="form-control" type="tel" id="phone" name="phone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$">
+    <input class="form-control" type="tel" id="phone" name="phone" value="<?php echo $phone; ?>" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$">
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     <?php else: ?>

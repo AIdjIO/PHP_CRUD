@@ -155,7 +155,7 @@ $(document).ready(function () {
           <td><?php echo substr($employee['checkout'], 11, 8); ?></td>
           <td><?php echo $employee['isVisitor'] == 1 ? "Visitor" : "Employee" ?></td>
           <td>
-            <a href="index.php?edit=<?php echo $employee['employee_id']; ?>" id="edit_link" class="btn btn-info" >Edit</a>
+            <a href="index.php?edit=<?php echo ($employee['employee_id'] . '&visit=' . $employee['isVisitor'])?>" id="edit_link" class="btn btn-info" >Edit</a>
             <a href="process.php?delete=<?php echo $employee['employee_id']; ?>" class="btn btn-danger">Delete</a>
 
             <?php if (($employee['checkout']==null)): ?>
@@ -182,12 +182,13 @@ $(document).ready( function () {
                .dataTable( {
                    responsive: true,
                    columnDefs: [
-                       { targets: [-1, -3], className: 'dt-body-right' }
+                       { targets: [-1, -3], className: 'dt-body-right' }                      
          ],
          dom: 'Bfrtip',
        buttons: [
            'copy', 'csv', 'excel', 'pdf', 'print'
-       ]
+       ],
+       "order": [[ 0, "desc" ]]
                } );
        } );
    
