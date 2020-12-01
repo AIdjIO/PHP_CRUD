@@ -37,7 +37,7 @@ button {
 
 <form action="index.php" method="post">
 
-<div class="row">
+<div id="collapse" class="<?php echo (isset($_SESSION['UserData']['Username']))? 'collapse':'';?> row">
 
 <button class=" col-sm-6" type="submit" name="employee">
 <div class="card">

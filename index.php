@@ -101,7 +101,14 @@ $(document).ready(function () {
           &nbsp;<?php echo date("d m Y");?> - <?php echo $location; ?> 
         <?php endif ?>"Covid" Check In/Out </h1>
     <!-- set default value of input date element to todays date with Javascript -->
-<p class="bg-warning lead">Please fill in the form, tick the checkbox to confirm whether your temperature exceeds 38°C else you should return home and self isolate/contact your GP.</p>
+    <?php if(isset($_SESSION['UserData']['Username'])):?>
+    <a class="" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+    <p class="bg-warning lead" style="text-align:center;">Display Check In buttons</p>
+        </a>
+        <?php else: ?>
+          <p class="bg-warning lead">Please fill in the form, tick the checkbox to confirm whether your temperature exceeds 38°C else you should return home and self isolate/contact your GP.</p>
+          <?php endif ?>
+
 </div>
 <br>
   
