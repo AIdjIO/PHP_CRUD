@@ -7,7 +7,7 @@ function createVisitorBadge($width,$height, $firstName, $lastName, $dept){
     // Create the size of image or blank image 
     // 354 x 574
 $image = imagecreatetruecolor($width, $height); 
-$fontfile = __DIR__ ."/assets/fonts/helvetica.ttf";
+$fontfile = __DIR__ . "/assets/fonts/helvetica.ttf";
 // Set the background color of image 
 $background_color = imagecolorallocate($image, 255, 255, 255); 
   
@@ -39,7 +39,8 @@ $srcLogo = imagecreatefrompng('logo.png');
 // Copy and merge
 imagecopymerge($dest, $src, 230,0, 0, 0, 111, 111, 100);
 imagecopymerge($dest, $srcLogo, 20,435, 0, 0, 46, 109, 100);
-imagepng($dest);
+imagepng($dest,'label.png');
 
 imagedestroy($image); 
+imagedestroy($dest); 
 }

@@ -1,9 +1,7 @@
 <?php error_reporting(1); ?>
 <!-- <button id="btnOpnCheckIn" class="btn btn-info btn-block" onclick="openForm()">Fill In Form</button>
    -->
-<?php 
-$isVisitor = isset($_POST['visitor']);
-?>
+<?php $isVisitor = isset($_POST['visitor']);?>
 
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">

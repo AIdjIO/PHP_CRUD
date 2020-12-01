@@ -3,6 +3,7 @@ require_once('db_connect.php');
 require_once('functions.php');
 include('./phpqrcode/qrlib.php');
 date_default_timezone_set("Europe/London");
+
 $first_name = "";
 $last_name = "";
 $department = "";
@@ -18,6 +19,7 @@ $first_name = filter_input(INPUT_POST,'first_name');
 $last_name =  filter_input(INPUT_POST,'last_name');
 $department = filter_input(INPUT_POST,'department');
 $temp_check = filter_input(INPUT_POST,'temp_check');
+$isVisitor = filter_input(INPUT_POST,'isVisitor');
 
 # Create timestamp for check in time
 $date_in = date('Y-m-d H:i:s');
@@ -58,8 +60,8 @@ if ($isVisitor){
 }
 
 # Create your query using : to add parameters to the statement
-$query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, last_updated, employee_id, temp_check) 
-VALUES (:first_name, :last_name,:department, :checkin, :last_updated, :employee_id, :temp_check)';
+$query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, last_updated, employee_id, temp_check, isVisitor) 
+VALUES (:first_name, :last_name,:department, :checkin, :last_updated, :employee_id, :temp_check, :isVisitor)';
 
 # Create a PDOStatement object
 $employee_create_statement = $db->prepare($query_employee_create);
@@ -72,6 +74,7 @@ $employee_create_statement->bindValue(':checkin',$date_in);
 $employee_create_statement->bindValue(':last_updated',$date_in);
 $employee_create_statement->bindValue(':department',$department);
 $employee_create_statement->bindValue(':employee_id',null,PDO::PARAM_INT);
+$employee_create_statement->bindValue(':isVisitor',$isVisitor);
 
 # Execute the query and store true or false based on success
 $execute_create_success = $employee_create_statement->execute();
