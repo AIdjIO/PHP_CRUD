@@ -3,10 +3,10 @@
    -->
 <?php $isVisitor = isset($_POST['visitor']);?>
 
-<div class="modal fade" id="myModal">
+<div class="modal fade" style="margin: 10px" tabindex="-1" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
-<form id="myForm" action="process.php" method="POST" >
+<form role="form" class="form-horizontal" id="myForm" action="process.php" method="POST" >
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Check In Form</h4>
@@ -30,12 +30,19 @@
     <div class="form-group">
     <?php if (isset($_POST['visitor'])):?>
     <label>Company Name:</label>
-    <?php else: ?>
-    <label>Department:</label>
-    <?php endif;?>
-    <input class="form-control"  type="text" name="department" placeholder="(optional)" value="<?php echo $department; ?>"  title="(optional)" />
+    <input class="form-control"  type="text" name="department" placeholder="Company Name" value="<?php echo $department; ?>"  title="Company Name" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
+    <label for="phone">Enter your phone number:</label>
+    <input class="form-control" type="tel" id="phone" name="phone" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$">
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+    <?php else: ?>
+    <label>Department:</label>
+    <input class="form-control"  type="text" name="department" placeholder="Department" value="<?php echo $department; ?>"  title="Department" />
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+    <?php endif;?>
     </div>
     <div class="form-check">
         <input class="form-check-input" type="checkbox" name="temp_check" value="1" title="make sure you check your temperature with the thermometer provided"/>

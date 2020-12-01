@@ -2,7 +2,7 @@
 <style>
 
 .card{
-  margin: 0 auto;
+  margin: 10 auto;
 }
 
 .fa-ticket{

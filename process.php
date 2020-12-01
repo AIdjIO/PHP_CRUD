@@ -9,7 +9,7 @@ $last_name = "";
 $department = "";
 $temp_check = "";
 $employee_id=0;
-$location = ""; #specify a physical location (optional)
+$location = "AVL Basildon"; #specify a physical location (optional)
 
 session_start(); /* Starts the session */
 

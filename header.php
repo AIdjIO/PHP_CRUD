@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Employee Check In/Out</title>
-   <link rel="stylesheet" type="text/css" href="./assets/css/main.min.css" />
+   <!-- <link rel="stylesheet" type="text/css" href="./assets/css/main.min.css" /> -->
    <link rel="stylesheet" type="text/css" href="./assets/css/datatables.min.css"/>
    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
    <script src="./assets/js/jquery-3.5.1.min.js"></script>
@@ -33,6 +33,5 @@
            visibility:visible;
        }
        <?php endif ?>
-
        </style>
   </head>
