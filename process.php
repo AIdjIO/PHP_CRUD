@@ -1,6 +1,7 @@
 <?php  error_reporting(1);
 require_once('db_connect.php');
 require_once('functions.php');
+include('./phpqrcode/qrlib.php');
 date_default_timezone_set("Europe/London");
 $first_name = "";
 $last_name = "";
