@@ -23,16 +23,16 @@ imagettftext($image, 35,0, 20, 160,  $text_color, $fontfile, ucfirst(strtolower(
 imagettftext($image, 25,0, 20, 210, $text_color, $fontfile, strtoupper($dept) ); 
 imagettftext($image, 40,0, 330, 60, $text_color, $fontfile, 'VISITOR' ); 
 imagettftext($image, 30,0, 20, 310, $text_color, $fontfile, 'VALID ' . date("D d/M/Y")); 
-QRcode::png($text_content, '025.png', QR_ECLEVEL_L, 3);
+QRcode::png($text_content, 'QR_Code.png', QR_ECLEVEL_L, 3);
 
 $image = imagerotate($image, 90,0);
 
 header("Content-Type: image/png"); 
   
-imagepng($image,'hello.png'); 
+imagepng($image,'label.png'); 
 
-$dest = imagecreatefrompng('hello.png');
-$src = imagecreatefrompng('025.png');
+$dest = imagecreatefrompng('label.png');
+$src = imagecreatefrompng('QR_Code.png');
 $logoPath =__DIR__ . 'assets/images/logo.png';
 $srcLogo = imagecreatefrompng('logo.png');
 

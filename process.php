@@ -51,7 +51,10 @@ $employee_msg = "You should check out now if your temperature is not less than 3
 } else{
 $temp_ok='OK';
 $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
-createVisitorBadge(574,354, $first_name, $last_name, $department);
+if ($isVisitor){
+  createVisitorBadge(574,354, $first_name, $last_name, $department);
+  shell_exec("brother_ql -b pyusb -m QL-700 -p usb://0x04F9:0x2042/000J2Z462429 print -l 62 label.png");
+  }
 }
 
 # Create your query using : to add parameters to the statement

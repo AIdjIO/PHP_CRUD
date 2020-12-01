@@ -39,7 +39,7 @@ button {
 
 <div class="row">
 
-<button class="d-flex justify-content-center col-sm-6" type="submit" name="employee">
+<button class=" col-sm-6" type="submit" name="employee">
 <div class="card">
 <i class="fa fa-users"></i>
 <h3 class="card-footer" style="text-align:center;">Employee</h3>
@@ -47,7 +47,7 @@ button {
 </button>
 
 
-<button class="d-flex justify-content-center col-sm-6" type="submit" name="visitor">
+<button class="col-sm-6" type="submit" name="visitor">
 <div class="card ">
 <i class="fa fa-ticket fa-ticket-alt"></i>
 <h3 class="card-footer" style="text-align:center">Visitor</h3>
