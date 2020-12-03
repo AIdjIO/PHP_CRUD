@@ -20,8 +20,9 @@
           <p class="bg-warning lead" style="text-align:right;">show admin area</p>
           </a>
           <?php endif ?>
+          <p class="float-left" id="time"></p>
 <div id="admin_collapse" class="container <?php echo (isset($_SESSION['UserData']['Username']))? '':'collapse';?>" >
-<p class="float-left" id="time"></p>
+
 <?php
 if (isset($_SESSION['UserData']['Username'])){
   $admin_msg = '<p class = "float-right">&nbsp;Congratulation! You are logged as admin. <a href="logout.php">Click here to Logout.</a></p>';

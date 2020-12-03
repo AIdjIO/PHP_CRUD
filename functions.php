@@ -2,7 +2,7 @@
 
 include('../phpqrcode/qrlib.php');
 
-function createVisitorBadge($width,$height, $firstName, $lastName, $dept,$phone_number,$tempOK,$location,$date_in){
+function createVisitorBadge($width,$height, $firstName, $lastName, $dept,$phone_number,$tempOK,$location){
 
     // Create the size of image or blank image 
     // 354 x 574
@@ -25,7 +25,7 @@ if ($tempOK=='OK'){
 }
 
 // Function to create image which contains string.
-$text_content = "Visitor at " . $location . "\n" . ucfirst(strtolower($firstName)) . " " . strtoupper($lastName) ."\n"  . strtoupper($dept) ."\n". $phone_number . "\n". 'Temp: '.$tempOK . "\n" . "Time in" . $date_in . "\n" . $valid . date("D d/M/Y") ;
+$text_content = "Visitor at " . $location . "\n" . ucfirst(strtolower($firstName)) . " " . strtoupper($lastName) ."\n"  . strtoupper($dept) ."\n". $phone_number . "\n". 'Temp: '.$tempOK . "\n" . "Time in" . date('H:i:s') . "\n" . $valid . date("D d/M/Y") ;
 imagettftext($image, 35,0, 20, 160,  $text_color, $fontfile, ucfirst(strtolower($firstName)) ." " . strtoupper($lastName)); 
 imagettftext($image, 25,0, 20, 210, $text_color, $fontfile, strtoupper($dept) ); 
 imagettftext($image, 20,0, 20, 260, $text_color, $fontfile, ('Temperature '. $tempOK) ); 

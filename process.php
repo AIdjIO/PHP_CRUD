@@ -9,7 +9,7 @@ $last_name = "";
 $department = "";
 $temp_check = "";
 $employee_id=0;
-$location = "AVL Basildon"; #specify a physical location (optional)
+$location = "Location Placeholder"; #specify a physical location (optional)
 $phone="";
 $isVisitor = 0;
 
