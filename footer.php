@@ -2,15 +2,25 @@
 <!-- Footer -->
 <style>
 .footer {
-  position: relative;
+  /* position: fixed; */
+  display: inline-block;
   left: 0;
-  bottom: 0;
+  bottom: 0vh;
   width: 100%;
   text-align: center;
 }
 </style>
-<footer class="footer">
-<div class="container pt-3">
+
+<footer class="footer mt-5 pt-5">
+<?php if(isset($_SESSION['UserData']['Username'])):?>
+  <a class="" data-toggle="collapse" href="#admin_collapse" role="button" aria-expanded="false" aria-controls="collapse">
+    <p class="bg-warning lead" style="text-align:right;">hide admin area</p>
+        <?php else: ?>
+          <a class="" data-toggle="collapse" href="#admin_collapse" role="button" aria-expanded="false" aria-controls="collapse">
+          <p class="bg-warning lead" style="text-align:right;">show admin area</p>
+          </a>
+          <?php endif ?>
+<div id="admin_collapse" class="container <?php echo (isset($_SESSION['UserData']['Username']))? '':'collapse';?>" >
 <p class="float-left" id="time"></p>
 <?php
 if (isset($_SESSION['UserData']['Username'])){

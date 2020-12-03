@@ -3,9 +3,9 @@
    -->
 <?php $isVisitor = isset($_POST['visitor']);?>
 
-<div class="modal fade" style="margin: 10px" tabindex="-1" id="myModal">
+<div class="modal fade" tabindex="-1" id="myModal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content p-3 m-3">
 <form role="form" class="form-horizontal" id="myForm" action="process.php" method="POST" >
         <!-- Modal Header -->
         <div class="modal-header">
@@ -14,43 +14,41 @@
         </div>
     <input type="hidden" name="employee_id" value="<?php echo $employee_id ?>" />
     <input type="hidden" name="isVisitor" value="<?php echo $isVisitor ?>" />
-
-    <div class="form-group">
+    <div class="form-group pt-2">
     <label for="first_name">First Name:</label>
     <input class="form-control"  type="text" name="first_name" placeholder="First name" value="<?php echo $first_name; ?>" title="First name" required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
-    <div class="form-group">
+    <div class="form-group pt-2">
     <label>Last Name:</label>
-    <input class="form-control"  type="text" name="last_name" placeholder="Last name" value="<?php echo $last_name; ?>" title="Last name"required/>
+    <input class="form-control "  type="text" name="last_name" placeholder="Last name" value="<?php echo $last_name; ?>" title="Last name"required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     </div>
-    <div class="form-group">
+    <div class="form-group pt-2">
     <?php if (isset($_POST['visitor']) || $_GET['visit']):?>
     <label>Company Name:</label>
-    <input class="form-control"  type="text" name="department" placeholder="Company Name" value="<?php echo $department; ?>"  title="Company Name" />
+    <input class="form-control "  type="text" name="department" placeholder="Company Name (Optional)" value="<?php echo $department; ?>"  title="Company Name" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     <label for="phone">Enter your phone number:</label>
-    <input class="form-control" type="tel" id="phone" name="phone" value="<?php echo $phone; ?>" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$">
+    <input class="form-control" type="tel" id="phone" placeholder="01234567890" name="phone" value="<?php echo $phone; ?>" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     <?php else: ?>
     <label>Department:</label>
-    <input class="form-control"  type="text" name="department" placeholder="Department" value="<?php echo $department; ?>"  title="Department" />
+    <input class="form-control pt-2"  type="text" name="department" placeholder="Department" value="<?php echo $department; ?>"  title="Department" />
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     <?php endif;?>
     </div>
     <div class="form-check">
+        <label class="pr-4">Tick the box if your temperature is less than 38°C?</label>
         <input class="form-check-input" type="checkbox" name="temp_check" value="1" title="make sure you check your temperature with the thermometer provided"/>
-        <label class="form-check-label">
-    Is your temperature less than 38°C?</label>
     <div class="valid-feedback">Temperature OK</div>
     <div class="invalid-feedback">Check this checkbox to continue.</div>
-</div>
+    </div>
     
     <!-- <div class="form-group">  -->
      <div class="modal-footer">

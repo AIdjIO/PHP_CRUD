@@ -13,6 +13,7 @@ $location = "AVL Basildon"; #specify a physical location (optional)
 $phone="";
 $isVisitor = 0;
 
+
 session_start(); /* Starts the session */
 
 if (isset($_POST['save'])){
@@ -52,16 +53,16 @@ include('db_error.php');
   if (!($temp_check==1)) {
 # if temperature is not 'Y' go home.
 $temp_ok='NOK';
-$employee_msg = "You should check out now if your temperature is not less than 38°C<br> and return home.<br>";
+$employee_msg = "Your temperature exceeds 38°C<br> you should return home.<br>";
 } else{
 $temp_ok='OK';
 $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
-if ($isVisitor){
-  createVisitorBadge(574,354, $first_name, $last_name, $department,$phone);
+  }
+  if ($isVisitor){
+createVisitorBadge(574,354, $first_name, $last_name, $department,$phone,$temp_ok,$location,$checkin,$date_in);
   shell_exec("brother_ql -b pyusb -m QL-700 -p usb://0x04F9:0x2042/000J2Z462429 print -l 62 label.png");
   // delete label after print
-  unlink('label.png');
-  }
+unlink('label.png');
 }
 
 # Create your query using : to add parameters to the statement
@@ -90,10 +91,14 @@ if (!$execute_create_success){
 # If an error occurred print the error 
 print_r($employee_create_statement->errInfo()[2]);
 $_SESSION['message']='Record has not been saved due to an error!<br>';
-$_SESSION['msg_type']='success';
+$_SESSION['msg_type']='danger';
 } else{
   $_SESSION['message']='Record has been saved!<br>' . $employee_msg;
+  if ($temp_ok=='OK'){
   $_SESSION['msg_type']='success';
+  } else {
+    $_SESSION['msg_type']='danger';
+  }
 }
 }
 header("location: index.php");

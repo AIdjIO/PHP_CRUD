@@ -36,24 +36,25 @@ button {
 </style>
 
 <form action="index.php" method="post">
-
 <div id="collapse" class="<?php echo (isset($_SESSION['UserData']['Username']))? 'collapse':'';?> row">
-
-<button class=" col-sm-6" type="submit" name="employee">
+<div class="container-fluid">
+<div class="row p-3">
+<button class="col-sm-6  p-3" type="submit" name="employee">
 <div class="card">
 <i class="fa fa-users"></i>
-<h3 class="card-footer" style="text-align:center;">Employee</h3>
+<h3 class="card-footer m-0" style="text-align:center;">Employee</h3>
 </div>
 </button>
 
 
-<button class="col-sm-6" type="submit" name="visitor">
+<button class="col-sm-6  p-3" type="submit" name="visitor">
 <div class="card ">
 <i class="fa fa-ticket fa-ticket-alt"></i>
-<h3 class="card-footer" style="text-align:center">Visitor</h3>
+<h3 class="card-footer m-0" style="text-align:center">Visitor</h3>
 </div>
 </button>
 </div>
-
+</div>
+</div>
 </form>
 

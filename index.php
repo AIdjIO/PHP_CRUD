@@ -52,7 +52,7 @@ if (!(isset($_GET["myFilters"]))){
 
 <?php require_once 'process.php';?>
 <?php include 'header.php';?>
-  <body style="background-color:#e9ecef;">
+<body style="m-3 p-5 background-color:#e9ecef;">
 
 
   <?php  if ((isset($_SESSION['message']))): ?>
@@ -76,9 +76,9 @@ $(document).ready(function () {
     </div>
     <?php endif ?>
 
-    <div class="container-fluid pt-3">
+    <div class="container-fluid">
       
-  <img class = "rounded float-left "  src="./assets/images/logo.png">
+  <img class="rounded float-left "  src="./assets/images/logo.png">
   
     <?php if(isset($_SESSION['UserData']['Username'])):?>
 
@@ -97,9 +97,9 @@ $(document).ready(function () {
     </form>
 <h1>
         <?php else: ?>
-          <h1 class=" col-md-auto display-5 ">
-          &nbsp;<?php echo date("d m Y");?> - <?php echo $location; ?> 
-        <?php endif ?>"Covid" Check In/Out </h1>
+          <h1 class=" col-md-auto display-5 " style="text-align:center">
+          &nbsp;<?php echo date("d/m/Y");?> - <?php echo $location; ?> 
+        <?php endif ?>"Covid" Check In</h1>
     <!-- set default value of input date element to todays date with Javascript -->
     <?php if(isset($_SESSION['UserData']['Username'])):?>
     <a class="" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
@@ -131,11 +131,11 @@ $(document).ready(function () {
                  <!-- if logged in as admin then create edit and delete buttons -->
                  <?php if(isset($_SESSION['UserData']['Username'])):?>
                   <div class="container-fluid border border-white rounded">
-    <h2>Employee List</h2>
+    <h2>Employee/Visitor List</h2>
     <table id="myTable" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
     <thead>
       <tr>
-        <th colspan="6">Employee Details</th>
+        <th colspan="6">Employee/Visitor Details</th>
       <th colspan="2">Action</th>
       <tr>
         <th>ID</th>
@@ -155,8 +155,8 @@ $(document).ready(function () {
              <tr>
           <!-- Print out individual column data -->
           <td><?php echo $employee['employee_id']; ?></td>
-          <td><?php echo $employee['first_name'] . ' ' . $employee['last_name']; ?></td>
-          <td><?php echo $employee['department']; ?></td>
+          <td><?php echo $employee['first_name'] . ' ' . strtoupper($employee['last_name']); ?></td>
+          <td><?php echo strtoupper($employee['department']); ?></td>
           <td><?php echo $employee['temp_check']; ?></td>
           <td><?php echo substr($employee['checkin'], 11, 8); ?></td>
           <td><?php echo substr($employee['checkout'], 11, 8); ?></td>
@@ -198,9 +198,7 @@ $(document).ready( function () {
        "order": [[ 0, "desc" ]]
                } );
        } );
-   
   
 </script>
 </body>
-
 </html>
