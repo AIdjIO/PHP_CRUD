@@ -35,7 +35,9 @@ CREATE TABLE `employees` (
   `temp_check` varchar(3) NOT NULL,
   `checkin` timestamp NULL DEFAULT NULL,
   `checkout` timestamp NULL DEFAULT NULL,
-  `last_updated` timestamp NULL DEFAULT NULL
+  `last_updated` timestamp NULL DEFAULT NULL,
+  `isVisitor` TINYINT NOT NULL,
+  `phone` VARCHAR(20) NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

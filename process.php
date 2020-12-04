@@ -1,12 +1,18 @@
-<?php  error_reporting(0);
+<?php  error_reporting(1);
 require_once('db_connect.php');
+require_once('functions.php');
+include('./phpqrcode/qrlib.php');
 date_default_timezone_set("Europe/London");
+
 $first_name = "";
 $last_name = "";
 $department = "";
 $temp_check = "";
 $employee_id=0;
-$location = ""; #specify a physical location (optional)
+$location = "Location Placeholder"; #specify a physical location (optional)
+$phone="";
+$isVisitor = 0;
+
 
 session_start(); /* Starts the session */
 
@@ -16,6 +22,8 @@ $first_name = filter_input(INPUT_POST,'first_name');
 $last_name =  filter_input(INPUT_POST,'last_name');
 $department = filter_input(INPUT_POST,'department');
 $temp_check = filter_input(INPUT_POST,'temp_check');
+$isVisitor = filter_input(INPUT_POST,'isVisitor');
+$phone = filter_input(INPUT_POST,'phone');
 
 # Create timestamp for check in time
 $date_in = date('Y-m-d H:i:s');
@@ -45,15 +53,21 @@ include('db_error.php');
   if (!($temp_check==1)) {
 # if temperature is not 'Y' go home.
 $temp_ok='NOK';
-$employee_msg = "You should check out now if your temperature is not less than 38°C<br> and return home.<br>";
+$employee_msg = "Your temperature exceeds 38°C<br> you should return home.<br>";
 } else{
 $temp_ok='OK';
 $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
+  }
+  if ($isVisitor){
+createVisitorBadge(574,354, $first_name, $last_name, $department,$phone,$temp_ok,$location,$checkin,$date_in);
+  shell_exec("brother_ql -b pyusb -m QL-700 -p usb://0x04F9:0x2042/000J2Z462429 print -l 62 label.png");
+  // delete label after print
+unlink('label.png');
 }
 
 # Create your query using : to add parameters to the statement
-$query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, last_updated, employee_id, temp_check) 
-VALUES (:first_name, :last_name,:department, :checkin, :last_updated, :employee_id, :temp_check)';
+$query_employee_create = 'INSERT INTO employees (first_name, last_name ,department, checkin, last_updated, employee_id, temp_check, isVisitor, phone) 
+VALUES (:first_name, :last_name,:department, :checkin, :last_updated, :employee_id, :temp_check, :isVisitor, :phone)';
 
 # Create a PDOStatement object
 $employee_create_statement = $db->prepare($query_employee_create);
@@ -66,6 +80,8 @@ $employee_create_statement->bindValue(':checkin',$date_in);
 $employee_create_statement->bindValue(':last_updated',$date_in);
 $employee_create_statement->bindValue(':department',$department);
 $employee_create_statement->bindValue(':employee_id',null,PDO::PARAM_INT);
+$employee_create_statement->bindValue(':isVisitor',$isVisitor);
+$employee_create_statement->bindValue(':phone',$phone);
 
 # Execute the query and store true or false based on success
 $execute_create_success = $employee_create_statement->execute();
@@ -75,10 +91,14 @@ if (!$execute_create_success){
 # If an error occurred print the error 
 print_r($employee_create_statement->errInfo()[2]);
 $_SESSION['message']='Record has not been saved due to an error!<br>';
-$_SESSION['msg_type']='success';
+$_SESSION['msg_type']='danger';
 } else{
   $_SESSION['message']='Record has been saved!<br>' . $employee_msg;
+  if ($temp_ok=='OK'){
   $_SESSION['msg_type']='success';
+  } else {
+    $_SESSION['msg_type']='danger';
+  }
 }
 }
 header("location: index.php");
@@ -136,9 +156,12 @@ if(isset($_GET['edit'])){
     $last_name = $employee_edit[0]['last_name'];
     $department = $employee_edit[0]['department'];
     $temp_check = $employee_edit[0]['temp_check'];
+    $isVisitor = $employee_edit[0]['isVisitor'];
+    $phone = $employee_edit[0]['phone'];
+    }
+    $employee_edit_statement->closeCursor();
   }
-  $employee_edit_statement->closeCursor();
-  }
+  
 
   # Update button is pressed (update record)
 if(isset($_POST['update'])){
@@ -149,6 +172,9 @@ if(isset($_POST['update'])){
   $department = filter_input(INPUT_POST,'department');
   $temp_check = filter_input(INPUT_POST,'temp_check');
   $date_updated = date('Y-m-d H:i:s');
+  $isVisitor = filter_input(INPUT_POST, 'isVisitor');
+  $phone = filter_input(INPUT_POST,'phone');
+  
 
   if (!($temp_check==1)) {
     # if temperature is not 'Y' go home.
@@ -159,10 +185,12 @@ if(isset($_POST['update'])){
     $employee_msg = "You can proceed into the building.<br> Remember to checkout when you leave.<br>";
     }
 
-  $query_employee_update = 'UPDATE employees
-                            SET first_name = :first_name, last_name=:last_name,
-                            department=:department, temp_check=:temp_check, last_updated=:last_updated
-                            WHERE employee_id=:employee_id';
+    $query_employee_update = 'UPDATE employees
+                              SET first_name = :first_name, last_name=:last_name,
+                              department=:department, temp_check=:temp_check, last_updated=:last_updated,phone=:phone
+                              WHERE employee_id=:employee_id';
+                              
+
   
   # Create a PDO statement object
   $employee_update_statement = $db->prepare($query_employee_update);
@@ -174,7 +202,8 @@ $employee_update_statement->bindValue(':temp_check',$temp_ok);
 $employee_update_statement->bindValue(':last_updated',$date_updated);
 $employee_update_statement->bindValue(':department',$department);
 $employee_update_statement->bindValue(':employee_id',$employee_id,PDO::PARAM_INT);
-  
+$employee_update_statement->bindValue(':phone',$phone);
+
   # Execute the query and store true or false based on success
   $execute_update_success = $employee_update_statement->execute();
   $employee_update_statement->closeCursor();
