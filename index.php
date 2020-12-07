@@ -142,6 +142,7 @@ $(document).ready(function () {
         <th>Name</th>
         <th>Department</th>
         <th>Temp<br>OK?</th>
+        <th>Phone</th>
         <th>In</th>
         <th>Out</th>
         <th>Visitor</th>
@@ -158,6 +159,7 @@ $(document).ready(function () {
           <td><?php echo $employee['first_name'] . ' ' . strtoupper($employee['last_name']); ?></td>
           <td><?php echo strtoupper($employee['department']); ?></td>
           <td><?php echo $employee['temp_check']; ?></td>
+          <td><?php echo $employee['phone'];?></td>
           <td><?php echo substr($employee['checkin'], 11, 8); ?></td>
           <td><?php echo substr($employee['checkout'], 11, 8); ?></td>
           <td><?php echo $employee['isVisitor'] == 1 ? "Visitor" : "Employee" ?></td>

@@ -12,27 +12,20 @@
 </style>
 
 <footer class="footer mt-5 pt-5">
-<?php if(isset($_SESSION['UserData']['Username'])):?>
+  <p class="float-left" id="time"></p>
   <a class="" data-toggle="collapse" href="#admin_collapse" role="button" aria-expanded="false" aria-controls="collapse">
-    <p class="bg-warning lead" style="text-align:right;">hide admin area</p>
-        <?php else: ?>
-          <a class="" data-toggle="collapse" href="#admin_collapse" role="button" aria-expanded="false" aria-controls="collapse">
-          <p class="bg-warning lead" style="text-align:right;">show admin area</p>
-          </a>
-          <?php endif ?>
-          <p class="float-left" id="time"></p>
-<div id="admin_collapse" class="container <?php echo (isset($_SESSION['UserData']['Username']))? '':'collapse';?>" >
+    <p class="bg-warning lead" style="text-align:right;">admin area</p></a>
+  
+  
 
-<?php
-if (isset($_SESSION['UserData']['Username'])){
-  $admin_msg = '<p class = "float-right">&nbsp;Congratulation! You are logged as admin. <a href="logout.php">Click here to Logout.</a></p>';
-  echo $admin_msg;
-  } else {
-    $admin_msg = '<p class="float-right"><a href="login.php" class="btn btn-dark">Admin</a></p>';
-    echo $admin_msg;
-  }
-  ?>
-  </div>
+        
+<div id="admin_collapse" class="container-fluid <?php echo (isset($_SESSION['UserData']['Username']))? 'collapse show':'collapse';?>" >
+<?php if(isset($_SESSION['UserData']['Username'])):?>
+    <p class = "float-right">&nbsp;Congratulation! You are logged as admin. <a href="logout.php">Click here to Logout.</a></p>
+    <?php else: ?>
+      <p class="float-right"><a href="login.php" class="btn btn-dark">Admin</a></p>
+             <?php endif ?>
+</div>
 </footer>
 <script>
     var myTime = document.getElementById('time');

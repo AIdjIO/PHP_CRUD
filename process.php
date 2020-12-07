@@ -1,4 +1,4 @@
-<?php  error_reporting(1);
+<?php  error_reporting(0);
 require_once('db_connect.php');
 require_once('functions.php');
 include('./phpqrcode/qrlib.php');
