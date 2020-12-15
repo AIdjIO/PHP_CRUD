@@ -1,13 +1,13 @@
 Improvement still required:
-- not allow employee to checkin more than once in a day.
-- ~~create an admin login screen.~~ implemented local admin login without database.
+- not allow employee to checkin more than once in a day. - not implemented
+- ~~create an admin login screen.~~ implemented local admin login without database. - not implemented
 - improve admin login with md5 and database saved password.
-- add ability for admin to update login password.
-- ~~provide admin related functionality only to admin user (edit/delete user, print (copy, pdf, csv, xlsx, hard print).~~ implemented
-- ~~ability to select 'from' and 'to' date for the admin backend instead of showing only daily check in on the front end~~ implemented
-- ~~added ability to print with Brother QL-700 (requires Python 3 and ![Brother_ql](https://github.com/pklaus/brother_ql) project installed~~)
-- added two seperate check in buttons, one for employee and one for visitor
-- added automatic print of badge for visitor with qrcode summarising check in details.
+- add ability for admin to update login password. 
+- ~~provide admin related functionality only to admin user (edit/delete user, print (copy, pdf, csv, xlsx, hard print).~~ - implemented
+- ~~ability to select 'from' and 'to' date for the admin backend instead of showing only daily check in on the front end~~ - implemented
+- ~~added ability to print with Brother QL-700 usb printer (requires Python 3 and ![Brother_ql](https://github.com/pklaus/brother_ql) project installed~~) - implemented
+- added two seperate check in buttons, one for employee and one for visitor - implemented
+- added automatic print of badge for visitor with qrcode summarising check in details. - implemented
 
 Building a CRUD (Create Read Update Delete) application with PHP/MySQL/Bootstrap4/datatable for employee checkin/checkout purpose.
 # User Front End
