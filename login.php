@@ -15,7 +15,7 @@ $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
 /* Check Username and Password existence in defined array */
 if (isset($logins[$Username]) && $logins[$Username] == $Password){
 /* Success: Set session variables and redirect to Protected page  */
-$_SESSION['UserData']['Username']=$logins[$Username];
+$_SESSION['UserData']['Username']=$Username;
 header("location:index.php");
 exit;
 } else {
