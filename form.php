@@ -68,7 +68,7 @@ input[type=submit] {
 <div class="modal fade" tabindex="-1" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content p-3 m-3">
-<form role="form" class="form-horizontal" id="myForm" action="process.php" method="POST"autocomplet="off" >
+<form role="form" class="form-horizontal" id="myForm" action="process.php" method="POST" autocomplet="off">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Check In Form</h4>
@@ -91,11 +91,14 @@ input[type=submit] {
     <div class="form-group pt-2">
     <?php if (isset($_POST['visitor']) || $_GET['visit']):?>
     <label>Company Name:</label>
-    <input class="form-control "  type="text" name="department" placeholder="Company Name (Optional)" value="<?php echo $department; ?>"  title="Company Name" />
+    <input class="form-control "  type="text" name="department" placeholder="Company Name (Mandatory)" value="<?php echo $department; ?>"  title="Company Name" required/>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group pt-2">
     <label for="phone">Enter your phone number:</label>
-    <input class="form-control" type="tel" id="phone" placeholder="01234567890" name="phone" value="<?php echo $phone; ?>" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required>
+    <input class="form-control" type="tel" id="phone" placeholder="01234567890 (Mandatory)" name="phone" value="<?php echo $phone; ?>" pattern="^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$" required>
+    <small id="emailHelp" class="form-text text-muted">Enter 11 digits phone number</small>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
     <?php else: ?>
@@ -109,7 +112,7 @@ input[type=submit] {
         <label class="pr-4">Tick the box if your temperature is less than 38°C?</label>
         <input class="form-check-input" type="checkbox" name="temp_check" value="1" title="make sure you check your temperature with the thermometer provided"/>
     <div class="valid-feedback">Temperature OK</div>
-    <div class="invalid-feedback">Check this checkbox to continue.</div>
+    <div class="invalid-feedback">Temperature NOK</div>
     </div>
     
     <!-- <div class="form-group">  -->

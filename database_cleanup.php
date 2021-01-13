@@ -8,5 +8,4 @@
           $employee_statement->execute();
           $employees = $employee_statement->fetchAll();
           $employee_statement->closeCursor();
-
 ?>

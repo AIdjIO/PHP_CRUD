@@ -1,3 +1,5 @@
 *.html
 gethint.php
 gethint.html
+*.png
+assets/images/

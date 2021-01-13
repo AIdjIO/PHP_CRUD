@@ -9,7 +9,7 @@ $last_name = "";
 $department = "";
 $temp_check = "";
 $employee_id=0;
-$location = "Location Placeholder"; #specify a physical location (optional)
+$location = "AVL Basildon"; #specify a physical location (optional)
 $phone="";
 $isVisitor = 0;
 
@@ -40,15 +40,19 @@ include('db_error.php');
 } elseif(!preg_match("/[a-zA-Z]{3,30}$/", $first_name)){
   $_SESSION['message']='First name not valid<br>Expecting only alphabetical letters between 3 to 30 characters long<br>';
   $_SESSION['msg_type']='warning';
+  // header("location: form.php");
 #include('db_error.php');
 } elseif(!preg_match("/[a-zA-Z]{3,30}$/", $last_name)){
   $_SESSION['message'] = "Last name not valid<br>Expecting only alphabetical letters between 3 to 30 characters long<br>";
   $_SESSION['msg_type']='warning';
 #include('db_error.php');
 } elseif(!preg_match("/[a-zA-Z]{1,30}$/", $department)){
-  $_SESSION['message']= "Department not valid<br>Expecting only alphabetical letters between 0 to 30 characters long<br>";
-  $_SESSION['msg_type']='warning';
+  $_SESSION['message'] = "Department not valid<br>Expecting only alphabetical letters between 0 to 30 characters long<br>";
+  $_SESSION['msg_type'] ='warning';
 #include('db_error.php');
+} elseif ($isVisitor==1 && !preg_match("/^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$/",$phone)){
+  $_SESSION['message'] = "Phone Number not valid<br>Expecting only 11 digits<br>";
+  $_SESSION['msg_type'] ='warning';
 } else { 
   if (!($temp_check==1)) {
 # if temperature is not 'Y' go home.
