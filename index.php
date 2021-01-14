@@ -193,6 +193,9 @@ $(document).ready(function () {
       </div>
       <?php include 'footer.php'?>
 
+<?php 
+echo '<script> var myLocation = "'.$location.'"; var fromDate ="' . $myFromDate . '"; var toDate = "' . $myToDate .'";</script>';
+?>
 <script>
 $(document).ready( function () {
            $('#myTable')
